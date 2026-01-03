@@ -1,0 +1,824 @@
+{
+  "info": {
+    "_postman_id": "4dd4bcb6-9901-4b37-b601-dcc10562ce62",
+    "name": "DayFlow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Company And Admin",
+          "id": "8dccf8f4-4675-48fa-9bea-8c468a47a0e1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "companyName",
+                  "value": "Odoo India",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "Meet Patel",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "meetkpatel10725@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "phone",
+                  "value": "8320635225",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "Password@123",
+                  "type": "text"
+                },
+                {
+                  "key": "logo",
+                  "type": "file",
+                  "src": [
+                    "postman-cloud:///1f0e8868-65c8-4f40-bc58-41ad79f80c90"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login With LoginId",
+          "id": "0bbf37c7-f502-443e-b16e-4e82cc546f2e",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login With Email",
+          "id": "e8da8217-d9f4-47c1-8259-c44ec6ff8d92",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"meetkpatel10725@gmail.com\",\r\n  \"password\": \"Password@123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "id": "098733f9-d4f1-4065-be56-fcd7d05827d4",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/auth/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Verify OTP",
+          "id": "fbdf31d8-4981-418a-9310-1139b2ceacbb",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/send-verify-otp",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "send-verify-otp"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Email",
+          "id": "125d3d22-13fd-49e3-bdcf-70580b2f599b",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"otp\": \"455081\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/verify-email",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "verify-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Reset OTP",
+          "id": "643895a6-df90-44ed-9616-0453f888ab37",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"meetkpatel10725@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/send-reset-otp",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "send-reset-otp"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "id": "d6664deb-57af-40de-a9b9-d5ac0c4e2d69",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"meetkpatel10725@gmail.com\",\r\n    \"otp\": \"831767\",\r\n    \"newPassword\": \"Reset@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/reset-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "5e753329-2c69-4e66-81a9-e6f521de8581"
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Admin Login",
+          "id": "500a81e0-7578-45b4-bc02-18b6e36d7eab",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIMEPA20260001\",\r\n  \"password\": \"Reset@123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Admin Create Employee",
+          "id": "ab30cc78-d1a1-4e40-9cec-c10bc4affeb9",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Kajal Patel\",\r\n  \"email\": \"kajalkpatel2910@gmail.com\",\r\n  \"phone\": \"9924436677\",\r\n  \"yearOfJoining\": 2026\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/admin/employees",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "admin",
+                "employees"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Admin Update Basic Employee  Details",
+          "id": "9e774c5b-9534-44c2-88e5-4489ac8e999c",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rahul S Sharma\",\r\n  \"phone\": \"9999999999\",\r\n  \"isActive\": true\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/admin/employees/6958ef742d0c1cd7bdd565e2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "admin",
+                "employees",
+                "6958ef742d0c1cd7bdd565e2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Admin Deactivate Employee",
+          "id": "9eceb93f-5360-420e-8acd-7b130508a521",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rahul S Sharma\",\r\n  \"phone\": \"9999999999\",\r\n  \"isActive\": true\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/admin/employees/6958ef742d0c1cd7bdd565e2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "admin",
+                "employees",
+                "6958ef742d0c1cd7bdd565e2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "108a07a0-c869-4384-b4e9-7c18a91da5d8"
+    },
+    {
+      "name": "Admin Profile Update",
+      "item": [
+        {
+          "name": "Admin Login",
+          "id": "2d08da24-1fe2-41e4-a108-20bf5a0d8d40",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIMEPA20260001\",\r\n  \"password\": \"Reset@123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Admin Update Profile Details",
+          "id": "7f5f48f7-afb8-4239-969f-b06327868b2c",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Meet Patel\",\r\n  \"phone\": \"8888888888\",\r\n  \"address\": \"Ahmedabad, Gujarat\",\r\n  \"about\": \"Founder & Admin of DayFlow\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "65f62f2c-047b-4bd3-b527-fdeebc240a78"
+    },
+    {
+      "name": "Employee Profile Update",
+      "item": [
+        {
+          "name": "Employee Login",
+          "id": "19d846f0-b423-4937-b4e8-b02a8a619ee4",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIKAPA20260003\",\r\n  \"password\": \"ih06527o\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Employee Update Profile Details",
+          "id": "c544dc1d-b4cd-4eb2-acdc-a9f3c0efeddf",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"address\": \"Surat, Gujarat\",\r\n  \"skills\": [\"Node.js\", \"MongoDB\", \"React\"],\r\n  \"about\": \"Software Engineer at DayFlow\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "d1d4ef9c-1aec-44a3-b3d3-c0c879584179"
+    },
+    {
+      "name": "Admin - Onboarding Details Filling",
+      "item": [
+        {
+          "name": "Admin Login",
+          "id": "599fe9b7-7913-4d63-9e41-29114bbccf62",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIMEPA20260001\",\r\n  \"password\": \"Reset@123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Profle Image",
+          "id": "21296035-099b-412b-acba-a2e0475905e4",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": [
+                    "postman-cloud:///1f0e890a-6882-4400-8a80-11c31e3e125b"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/onboarding/avatar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "onboarding",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "f21a74d9-2c0e-4e49-a111-9a7889003c63"
+    },
+    {
+      "name": "Employee - Onboarding Details Filling",
+      "item": [
+        {
+          "name": "Employee Login",
+          "id": "e37269cc-e131-4f68-b6ee-bc518a36ce50",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIKAPA20260003\",\r\n  \"password\": \"ih06527o\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Profle Image",
+          "id": "c8ea1030-b336-4ec3-ae7c-0664b0015df5",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": [
+                    "postman-cloud:///1f0e890f-d7e6-48a0-97a5-e3b4042cd479"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/onboarding/avatar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "onboarding",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "d3529df9-9b12-4c8b-9efa-445f5952416f"
+    },
+    {
+      "name": "Get Admin Current Details",
+      "item": [
+        {
+          "name": "Admin Login",
+          "id": "26245525-e193-4ecf-9e40-cd3b862cfbb6",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIMEPA20260001\",\r\n  \"password\": \"Reset@123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current Details",
+          "id": "d814769c-5b81-40eb-a3b4-5b12b94fa1af",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIMEPA20260001\",\r\n  \"password\": \"Reset@123\"\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "c028129e-6091-4f98-a27c-d31535daa7a8"
+    },
+    {
+      "name": "Get Employee Current Details",
+      "item": [
+        {
+          "name": "Employee Login",
+          "id": "f2f70196-1a86-405f-b324-2949b1d7b29c",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIKAPA20260003\",\r\n  \"password\": \"ih06527o\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current Details",
+          "id": "1cf7498c-fda7-43bb-b763-1866ee5460ac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"identifier\": \"OIMEPA20260001\",\r\n  \"password\": \"Reset@123\"\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/users/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7110af0f-cef6-4980-8d3a-2913e0f9202d"
+    }
+  ]
+}
