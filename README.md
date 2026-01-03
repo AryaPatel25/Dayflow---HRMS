@@ -1,7 +1,5 @@
 # 🌿 DayFlow — Human Resource Management System (HRMS)
 
-**Streamlining people management, one workflow at a time.**
-
 🚀 **Odoo × GCET Hackathon 26**  
 📍 Virtual Round  
 📅 **03 January 2026 (Saturday)**  
