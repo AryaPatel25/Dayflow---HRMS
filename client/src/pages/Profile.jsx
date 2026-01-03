@@ -4,9 +4,7 @@ import PrivateInfo from "../components/PrivateInfo.jsx";
 import SalaryInfo from "../components/SalaryInfo.jsx";
 
 const Profile = () => {
-
-    const [activeTab, setActiveTab] = useState('Resume');
-
+  const [activeTab, setActiveTab] = useState("Resume");
 
   return (
     <div className="w-full min-h-screen p-8">
@@ -23,34 +21,77 @@ const Profile = () => {
           </div>
 
           <div className="flex flex-col gap-4">
-            <h2 className="text-4xl font-bold">John Doe</h2>
-            <h2 className="">Serial No.: <p className="text-lg inline text-zinc-400">ODARRA20000001</p></h2>
-            <h2 className="">Email Id: <p className="text-lg inline text-zinc-400">john@doe.com</p></h2>
-            <h2 className="">Mobile No.: <p className="text-lg inline text-zinc-400">123 456 789</p></h2>
-            <h2 className="">Gender: <p className="text-lg inline text-zinc-400">Male</p></h2>
-            <h2 className="">Date of birth: <p className="text-lg inline text-zinc-400">25-09-98</p></h2>
+            <h1 className="text-5xl font-bold">John Doe</h1>
+            <h2 className="">
+              Serial No.:{" "}
+              <p className="text-lg inline text-zinc-400">ODARRA20000001</p>
+            </h2>
+            <h2 className="">
+              Email Id:{" "}
+              <p className="text-lg inline text-zinc-400">john@doe.com</p>
+            </h2>
+            <h2 className="">
+              Mobile No.:{" "}
+              <p className="text-lg inline text-zinc-400">123 456 789</p>
+            </h2>
+            <h2 className="">
+              Gender: <p className="text-lg inline text-zinc-400">Male</p>
+            </h2>
+            <h2 className="">
+              Date of birth:{" "}
+              <p className="text-lg inline text-zinc-400">25-09-98</p>
+            </h2>
           </div>
 
           <div className="flex flex-col gap-4">
-            <h2 className="">Company: <p className="text-lg inline text-zinc-400">X Corp.</p></h2>
-            <h2 className="">Email Id: <p className="text-lg inline text-zinc-400">john@doe.com</p></h2>
-            <h2 className="">Department: <p className="text-lg inline text-zinc-400">Developer</p></h2>
-            <h2 className="">Role: <p className="text-lg inline text-zinc-400">Software Developer</p></h2>
-            <h2 className="">Location: <p className="text-lg inline text-zinc-400">123 Front Street, near bank</p></h2>
+            <h2 className="">
+              Company: <p className="text-lg inline text-zinc-400">X Corp.</p>
+            </h2>
+            <h2 className="">
+              Email Id:{" "}
+              <p className="text-lg inline text-zinc-400">john@doe.com</p>
+            </h2>
+            <h2 className="">
+              Department:{" "}
+              <p className="text-lg inline text-zinc-400">Developer</p>
+            </h2>
+            <h2 className="">
+              Role:{" "}
+              <p className="text-lg inline text-zinc-400">Software Developer</p>
+            </h2>
+            <h2 className="">
+              Location:{" "}
+              <p className="text-lg inline text-zinc-400">
+                123 Front Street, near bank
+              </p>
+            </h2>
           </div>
-         
         </div>
 
         <div className="w-full flex gap-12 p-2 border-b border-zinc-700 text-xl font-medium">
-            <h1 onClick={() => setActiveTab('Resume')} className="hover:bg-zinc-800 rounded-2xl px-4 py-2 cursor-pointer">Resume</h1>
-            <h1 onClick={() => setActiveTab('PrivateInfo')} className="hover:bg-zinc-800 rounded-2xl px-4 py-2 cursor-pointer">Private Info.</h1>
-            <h1 onClick={() => setActiveTab('SalaryInfo')} className="hover:bg-zinc-800 rounded-2xl px-4 py-2 cursor-pointer">Salary Info.</h1>
+          <h1
+            onClick={() => setActiveTab("Resume")}
+            className="hover:bg-zinc-800 rounded-2xl px-4 py-2 cursor-pointer"
+          >
+            Resume
+          </h1>
+          <h1
+            onClick={() => setActiveTab("PrivateInfo")}
+            className="hover:bg-zinc-800 rounded-2xl px-4 py-2 cursor-pointer"
+          >
+            Private Info.
+          </h1>
+          <h1
+            onClick={() => setActiveTab("SalaryInfo")}
+            className="hover:bg-zinc-800 rounded-2xl px-4 py-2 cursor-pointer"
+          >
+            Salary Info.
+          </h1>
         </div>
 
-        {activeTab === 'Resume' && <Resume />}
-        {activeTab === 'PrivateInfo' && <PrivateInfo />}
-        {activeTab === 'SalaryInfo' && <SalaryInfo />}
-
+        {activeTab === "Resume" && <Resume />}
+        {activeTab === "PrivateInfo" && <PrivateInfo />}
+        {activeTab === "SalaryInfo" && <SalaryInfo />}
       </div>
     </div>
   );

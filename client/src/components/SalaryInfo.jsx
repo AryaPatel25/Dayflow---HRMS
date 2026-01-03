@@ -1,67 +1,65 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const SalaryInfo = () => {
-  // Sample salary data - replace with actual data from API
-  const salaryData = {
-    monthWage: 50000,
-    yearlyWage: 600000,
-    workingDaysPerWeek: "",
-    breakTime: "",
-  };
+  // State for wage input
+  const [monthWage, setMonthWage] = useState(50000);
+  const [workingDaysPerWeek, setWorkingDaysPerWeek] = useState("");
+  const [breakTime, setBreakTime] = useState("");
 
-  const salaryComponents = [
-    {
-      name: "Basic Salary",
-      amount: 25000.0,
-      percentage: 50.0,
-      description:
-        "Define Basic salary from company cost compute it based on monthly Wages",
-    },
-    {
-      name: "House Rent Allowance",
-      amount: 12500.0,
-      percentage: 50.0,
-      description: "HRA provided to employees 50% of the basic salary",
-    },
-    {
-      name: "Standard Allowance",
-      amount: 4167.0,
-      percentage: 16.67,
-      description:
-        "A standard allowance is a predetermined, Fixed amount provided to employee as part of their salary",
-    },
-    {
-      name: "Performance Bonus",
-      amount: 2082.5,
-      percentage: 8.33,
-      description:
-        "Variable amount paid during payroll, The value defined by the company and calculated as a % of the basic salary",
-    },
-    {
-      name: "Leave Travel Allowance",
-      amount: 2082.5,
-      percentage: 8.33,
-      description:
-        "LTA is paid by the company to employees to cover their travel expenses, and calculated as a % of the basic salary",
-    },
-    {
-      name: "Fixed Allowance",
-      amount: 2918.0,
-      percentage: 11.67,
-      description:
-        "Fixed allowance portion of wages is determined after calculating all salary components",
-    },
-  ];
+  // Calculated values
+  const [basicSalary, setBasicSalary] = useState(0);
+  const [hra, setHra] = useState(0);
+  const [standardAllowance, setStandardAllowance] = useState(4167);
+  const [performanceBonus, setPerformanceBonus] = useState(0);
+  const [lta, setLta] = useState(0);
+  const [fixedAllowance, setFixedAllowance] = useState(0);
 
-  const providentFund = {
-    employee: { amount: 3000.0, percentage: 12.0 },
-    employer: { amount: 3000.0, percentage: 12.0 },
-  };
+  // PF and Tax rates (configurable)
+  const pfRate = 12.0;
+  const professionalTax = 200.0;
+
+  // Auto-calculate all components when monthWage changes
+  useEffect(() => {
+    // Basic Salary = 50% of wage
+    const basic = monthWage * 0.5;
+    setBasicSalary(basic);
+
+    // HRA = 50% of Basic
+    const hraAmount = basic * 0.5;
+    setHra(hraAmount);
+
+    // Performance Bonus = 8.33% of Basic
+    const bonus = basic * 0.0833;
+    setPerformanceBonus(bonus);
+
+    // Leave Travel Allowance = 8.33% of Basic
+    const ltaAmount = basic * 0.0833;
+    setLta(ltaAmount);
+
+    // Fixed Allowance = wage - (basic + hra + standard + bonus + lta)
+    const fixed =
+      monthWage - (basic + hraAmount + standardAllowance + bonus + ltaAmount);
+    setFixedAllowance(fixed);
+  }, [monthWage, standardAllowance]);
+
+  const yearlyWage = monthWage * 12;
+
+  // Calculate PF amounts
+  const pfEmployee = (basicSalary * pfRate) / 100;
+  const pfEmployer = (basicSalary * pfRate) / 100;
+
+  // Calculate percentages
+  const basicPercentage = (basicSalary / monthWage) * 100;
+  const hraPercentage = (hra / basicSalary) * 100;
+  const standardPercentage = (standardAllowance / monthWage) * 100;
+  const bonusPercentage = (performanceBonus / basicSalary) * 100;
+  const ltaPercentage = (lta / basicSalary) * 100;
+  const fixedPercentage = (fixedAllowance / monthWage) * 100;
 
   const taxDeductions = [
     {
       name: "Professional Tax",
-      amount: 200.0,
+      amount: professionalTax,
       description: "Professional Tax deducted from the Gross salary",
     },
   ];
@@ -75,7 +73,12 @@ const SalaryInfo = () => {
           <div className="flex items-center gap-4">
             <label className="text-lg w-40">Month Wage</label>
             <div className="flex-1 border-b border-zinc-600 pb-1">
-              <span className="text-2xl font-bold">{salaryData.monthWage}</span>
+              <input
+                type="number"
+                value={monthWage}
+                onChange={(e) => setMonthWage(Number(e.target.value))}
+                className="text-2xl font-bold bg-transparent outline-none w-full"
+              />
             </div>
             <span className="text-zinc-400">/ Month</span>
           </div>
@@ -83,7 +86,7 @@ const SalaryInfo = () => {
           <div className="flex items-center gap-4">
             <label className="text-lg w-40">Yearly wage</label>
             <div className="flex-1 border-b border-zinc-600 pb-1">
-              <span className="text-2xl font-bold">{salaryData.yearlyWage}</span>
+              <span className="text-2xl font-bold">{yearlyWage}</span>
             </div>
             <span className="text-zinc-400">/ Yearly</span>
           </div>
@@ -92,9 +95,13 @@ const SalaryInfo = () => {
         {/* Right - Working Days */}
         <div className="space-y-6">
           <div className="flex items-center gap-4">
-            <label className="text-lg flex-1">No of working days in a week:</label>
+            <label className="text-lg flex-1">
+              No of working days in a week:
+            </label>
             <input
               type="text"
+              value={workingDaysPerWeek}
+              onChange={(e) => setWorkingDaysPerWeek(e.target.value)}
               className="flex-1 bg-transparent border-b border-zinc-600 pb-1 outline-none focus:border-zinc-400"
               placeholder=""
             />
@@ -105,6 +112,8 @@ const SalaryInfo = () => {
             <label className="text-lg flex-1">Break Time:</label>
             <input
               type="text"
+              value={breakTime}
+              onChange={(e) => setBreakTime(e.target.value)}
               className="flex-1 bg-transparent border-b border-zinc-600 pb-1 outline-none focus:border-zinc-400"
               placeholder=""
             />
@@ -114,101 +123,210 @@ const SalaryInfo = () => {
       </div>
 
       {/* Main Content - Two Columns */}
-      <div className="grid grid-cols-2 gap-40">
-        {/* Left Column - Salary Components */}
-        <div className="space-y-8">
-          <h2 className="text-xl font-bold pb-2 border-b border-zinc-700">
-            Salary Components
-          </h2>
+      <div className="space-y-8 mt-20">
+        <h2 className="text-xl font-bold pb-2 border-b border-zinc-700">
+          Salary Components
+        </h2>
+      </div>
 
-          {salaryComponents.map((component, index) => (
-            <div key={index} className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-base">{component.name}</label>
-                <div className="flex items-center gap-4">
-                  <span className="border-b border-zinc-600 px-2 pb-1">
-                    {component.amount.toFixed(2)}
-                  </span>
-                  <span className="text-zinc-400 text-sm">₹ / month</span>
-                  <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
-                    {component.percentage.toFixed(2)}
-                  </span>
-                  <span className="text-zinc-400 text-sm">%</span>
-                </div>
-              </div>
-              <p className="text-xs text-zinc-500">{component.description}</p>
+      {/* Left Column - Salary Components */}
+      <div className="grid grid-cols-2 gap-20">
+        {/* Basic Salary */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-base">Basic Salary</label>
+            <div className="flex items-center gap-4">
+              <span className="border-b border-zinc-600 px-2 pb-1">
+                {basicSalary.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">₹ / month</span>
+              <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
+                {basicPercentage.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">%</span>
             </div>
-          ))}
+          </div>
+          <p className="text-xs text-zinc-500">
+            Define Basic salary from company cost compute it based on monthly
+            Wages
+          </p>
         </div>
 
-        {/* Right Column - PF & Tax */}
-        <div className="space-y-8">
-          {/* Provident Fund Section */}
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold pb-2 border-b border-zinc-700">
-              Provident Fund (PF) Contribution
-            </h2>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-base">Employee</label>
-                <div className="flex items-center gap-4">
-                  <span className="border-b border-zinc-600 px-2 pb-1">
-                    {providentFund.employee.amount.toFixed(2)}
-                  </span>
-                  <span className="text-zinc-400 text-sm">₹ / month</span>
-                  <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
-                    {providentFund.employee.percentage.toFixed(2)}
-                  </span>
-                  <span className="text-zinc-400 text-sm">%</span>
-                </div>
-              </div>
-              <p className="text-xs text-zinc-500">
-                PF is calculated based on the basic salary
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-base">Employer</label>
-                <div className="flex items-center gap-4">
-                  <span className="border-b border-zinc-600 px-2 pb-1">
-                    {providentFund.employer.amount.toFixed(2)}
-                  </span>
-                  <span className="text-zinc-400 text-sm">₹ / month</span>
-                  <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
-                    {providentFund.employer.percentage.toFixed(2)}
-                  </span>
-                  <span className="text-zinc-400 text-sm">%</span>
-                </div>
-              </div>
-              <p className="text-xs text-zinc-500">
-                PF is calculated based on the basic salary
-              </p>
+        {/* House Rent Allowance */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-base">House Rent Allowance</label>
+            <div className="flex items-center gap-4">
+              <span className="border-b border-zinc-600 px-2 pb-1">
+                {hra.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">₹ / month</span>
+              <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
+                {hraPercentage.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">%</span>
             </div>
           </div>
+          <p className="text-xs text-zinc-500">
+            HRA provided to employees 50% of the basic salary
+          </p>
+        </div>
 
-          {/* Tax Deductions Section */}
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold pb-2 border-b border-zinc-700">
-              Tax Deductions
-            </h2>
-
-            {taxDeductions.map((tax, index) => (
-              <div key={index} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <label className="text-base">{tax.name}</label>
-                  <div className="flex items-center gap-4">
-                    <span className="border-b border-zinc-600 px-2 pb-1">
-                      {tax.amount.toFixed(2)}
-                    </span>
-                    <span className="text-zinc-400 text-sm">₹ / month</span>
-                  </div>
-                </div>
-                <p className="text-xs text-zinc-500">{tax.description}</p>
-              </div>
-            ))}
+        {/* Standard Allowance */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-base">Standard Allowance</label>
+            <div className="flex items-center gap-4">
+              <input
+                type="number"
+                value={standardAllowance}
+                onChange={(e) => setStandardAllowance(Number(e.target.value))}
+                className="border-b border-zinc-600 px-2 pb-1 bg-transparent outline-none w-20 text-right"
+              />
+              <span className="text-zinc-400 text-sm">₹ / month</span>
+              <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
+                {standardPercentage.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">%</span>
+            </div>
           </div>
+          <p className="text-xs text-zinc-500">
+            A standard allowance is a predetermined, Fixed amount provided to
+            employee as part of their salary
+          </p>
+        </div>
+
+        {/* Performance Bonus */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-base">Performance Bonus</label>
+            <div className="flex items-center gap-4">
+              <span className="border-b border-zinc-600 px-2 pb-1">
+                {performanceBonus.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">₹ / month</span>
+              <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
+                {bonusPercentage.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">%</span>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-500">
+            Variable amount paid during payroll, The value defined by the
+            company and calculated as a % of the basic salary
+          </p>
+        </div>
+
+        {/* Leave Travel Allowance */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-base">Leave Travel Allowance</label>
+            <div className="flex items-center gap-4">
+              <span className="border-b border-zinc-600 px-2 pb-1">
+                {lta.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">₹ / month</span>
+              <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
+                {ltaPercentage.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">%</span>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-500">
+            LTA is paid by the company to employees to cover their travel
+            expenses, and calculated as a % of the basic salary
+          </p>
+        </div>
+
+        {/* Fixed Allowance */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-base">Fixed Allowance</label>
+            <div className="flex items-center gap-4">
+              <span className="border-b border-zinc-600 px-2 pb-1">
+                {fixedAllowance.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">₹ / month</span>
+              <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
+                {fixedPercentage.toFixed(2)}
+              </span>
+              <span className="text-zinc-400 text-sm">%</span>
+            </div>
+          </div>
+          <p className="text-xs text-zinc-500">
+            Fixed allowance portion of wages is determined after calculating all
+            salary components
+          </p>
+        </div>
+      </div>
+
+      {/* Right Column - PF & Tax */}
+      <div className="space-y-8 mt-20">
+        {/* Provident Fund Section */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-bold pb-2 border-b border-zinc-700">
+            Provident Fund (PF) Contribution
+          </h2>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-base">Employee</label>
+              <div className="flex items-center gap-4">
+                <span className="border-b border-zinc-600 px-2 pb-1">
+                  {pfEmployee.toFixed(2)}
+                </span>
+                <span className="text-zinc-400 text-sm">₹ / month</span>
+                <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
+                  {pfRate.toFixed(2)}
+                </span>
+                <span className="text-zinc-400 text-sm">%</span>
+              </div>
+            </div>
+            <p className="text-xs text-zinc-500">
+              PF is calculated based on the basic salary
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-base">Employer</label>
+              <div className="flex items-center gap-4">
+                <span className="border-b border-zinc-600 px-2 pb-1">
+                  {pfEmployer.toFixed(2)}
+                </span>
+                <span className="text-zinc-400 text-sm">₹ / month</span>
+                <span className="border-b border-zinc-600 px-2 pb-1 min-w-[60px] text-right">
+                  {pfRate.toFixed(2)}
+                </span>
+                <span className="text-zinc-400 text-sm">%</span>
+              </div>
+            </div>
+            <p className="text-xs text-zinc-500">
+              PF is calculated based on the basic salary
+            </p>
+          </div>
+        </div>
+
+        {/* Tax Deductions Section */}
+        <div className="space-y-4 mt-20">
+          <h2 className="text-xl font-bold pb-2 border-b border-zinc-700">
+            Tax Deductions
+          </h2>
+
+          {taxDeductions.map((tax, index) => (
+            <div key={index} className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label className="text-base">{tax.name}</label>
+                <div className="flex items-center gap-4">
+                  <span className="border-b border-zinc-600 px-2 pb-1">
+                    {tax.amount.toFixed(2)}
+                  </span>
+                  <span className="text-zinc-400 text-sm">₹ / month</span>
+                </div>
+              </div>
+              <p className="text-xs text-zinc-500">{tax.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

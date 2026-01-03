@@ -1,6 +1,6 @@
 import React from "react";
 
-const Search = () => {
+const Search = ({ searchQuery, setSearchQuery }) => {
   return (
     <div className="w-full h-15 border-b border-zinc-700 flex justify-between items-center px-20">
       <div className="flex items-center gap-2 px-2 py-1 bg-zinc-800 border border-zinc-700 rounded-lg cursor-pointer hover:bg-zinc-900">
@@ -8,7 +8,13 @@ const Search = () => {
         <p className="text-sm inline">New</p>
       </div>
       <div className="w-120 justify-between flex items-center bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-sm outline-none ml-2">
-        <input type="text" placeholder="Search..." className="outline-none" />
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          className="outline-none bg-transparent w-full" 
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
         <SearchIcon />
       </div>
     </div>
